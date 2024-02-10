@@ -41,6 +41,10 @@
                </font>
             </Text>
             <TextField fx:id="customerNumber" layoutX="27.0" layoutY="164.0" />
+            <Text fx:id="errMessage" layoutX="23.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="153.33669662475586">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
             
          </children>
       </Pane>
