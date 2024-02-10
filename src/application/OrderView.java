@@ -16,7 +16,7 @@ public class OrderView {
 	@FXML
 	private Button placeOrderButton;
 	@FXML
-	private Text orderSummary;
+	private Text orderSummary, errMessage;
 	@FXML
 	private TextField customerName, customerNumber, pizzaQuantity;
 	@FXML
@@ -64,6 +64,7 @@ public class OrderView {
 		this.pizzaSizeList.setValue("Medium");
 		this.crustTypeList.setValue("Normal");
 		this.orderSummary.setText("");
+		this.errMessage.setText("");
 		
 		for(CheckBox topping: this.toppings) {			
 			if(topping.isSelected()) topping.setSelected(false);
@@ -90,21 +91,33 @@ public class OrderView {
 		// Storing all the data provided!
 		String   _pizzaSize = this.pizzaSizeList.getValue(),
 				 _crustType = this.crustTypeList.getValue(),
-				 _customerName = this.customerName.getText();
+				 _customerName = this.customerName.getText().trim();
 		String[] _toppings = this.getSelectedToppings(this.toppings),
 				 _meatToppings = this.getSelectedToppings(this.meatToppings);
-		int		 _customerNumber = Integer.parseInt(this.customerNumber.getText()),
-				 _quantiy = Integer.parseInt(this.pizzaQuantity.getText());
+		int		 _customerNumber = 0,
+				 _quantity = 0;
 		
-		calculatePizzaBasePrice(_pizzaSize, _crustType, _toppings.length, _meatToppings.length, _quantiy);
+		try {
+			
+			_customerNumber = Integer.parseInt(this.customerNumber.getText());
+			_quantity = Integer.parseInt(this.pizzaQuantity.getText());
 		
-		this.orderController = new OrderController(_pizzaSize, _crustType, Utility.mergeArrays(_toppings, _meatToppings), _customerName, _customerNumber, _quantiy);
+			if(!_customerName.isEmpty() && _quantity > 0) {
+			
+				calculatePizzaBasePrice(_pizzaSize, _crustType, _toppings.length, _meatToppings.length, _quantity);
 		
-		// Setting the fields again to default values!
-		this.setDefaults();
+				this.orderController = new OrderController(_pizzaSize, _crustType, Utility.mergeArrays(_toppings, _meatToppings), _customerName, _customerNumber, _quantity);
 		
-		// Printing the order summary!
-		this.printOrderSummary();
+				// Setting the fields again to default values!
+				this.setDefaults();
+		
+				// Printing the order summary!
+				this.printOrderSummary();
+		}
+	
+		} catch (NumberFormatException e){ 
+			this.errMessage.setText("Customer Number and Pizza Quantity should be a number!");
+		}
 		
 	}
 	
