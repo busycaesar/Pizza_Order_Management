@@ -20,7 +20,7 @@ public class OrderController {
 		
 	}
 	
-	// This function returns the name of the customer!
+	// This function returns the details of the customer!
 	public String getCustomerDetails() {
 		return this.order.getCustomer().getCustomerName() + "(" + this.order.getCustomer().getCustomerNumber() + ")";
 	}
@@ -29,9 +29,15 @@ public class OrderController {
 	public String getPizzaDetails() {
 		String pizzaSize = this.order.getPizza().getPizzaSize(),
 			   crustType = this.order.getPizza().getCrustType(),
-			   toppings = String.join(", ", this.order.getPizza().getToppings());
+			   // If there are no toppings selected by the user, the system displays no toppings!
+			   _toppings = "no toppings";
+		String[] toppings = this.order.getPizza().getToppings();
 		
-		return pizzaSize + " size, " + crustType + " crust pizza with " + toppings;
+		// If there are toppings selected, it will be in .csv form!
+		if(toppings.length > 0) _toppings = String.join(", ", this.order.getPizza().getToppings());
+		
+		// Returning the detail of pizza!
+		return pizzaSize + " size, " + crustType + " crust pizza with " + _toppings;
 	}
 	
 	// This function returns the total quantity of pizza ordered!
