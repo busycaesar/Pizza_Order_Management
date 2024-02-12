@@ -5,10 +5,10 @@ public class Customer {
 	
 		// Here are the data related to the customer which would be stored!
 		private String customerName;
-		private int customerNumber;
+		private long customerNumber;
 		
 		// This is the constructor which can be used to build a new customer object!
-		public Customer(String _customerName, int _customerNumber) {
+		public Customer(String _customerName, long _customerNumber) {
 			this.customerName = _customerName;
 			this.customerNumber = _customerNumber;
 		}
@@ -19,7 +19,7 @@ public class Customer {
 		}
 
 		// This function returns the number of the customer!
-		public int getCustomerNumber() {
+		public long getCustomerNumber() {
 			return this.customerNumber;
 		}
 		

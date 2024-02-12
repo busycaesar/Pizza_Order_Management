@@ -11,7 +11,7 @@ public class OrderController {
 	private Order order;
 	
 	// This constructor accepts all the data and created the order object!
-	public OrderController(String _pizzaSize, String _crustType, String[] _toppings, String _customerName, int _customerNumber, int _quantity) {
+	public OrderController(String _pizzaSize, String _crustType, String[] _toppings, String _customerName, long _customerNumber, int _quantity) {
 		
 		Pizza pizza = new Pizza(_pizzaSize, _crustType, _toppings);
 		Customer customer = new Customer(_customerName, _customerNumber);

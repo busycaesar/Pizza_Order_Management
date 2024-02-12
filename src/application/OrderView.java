@@ -94,12 +94,12 @@ public class OrderView {
 				 _customerName = this.customerName.getText().trim();
 		String[] _toppings = this.getSelectedToppings(this.toppings),
 				 _meatToppings = this.getSelectedToppings(this.meatToppings);
-		int		 _customerNumber = 0,
-				 _quantity = 0;
+		long	 _customerNumber = 0;
+		int 	 _quantity = 0;
 		
 		try {
 			
-			_customerNumber = Integer.parseInt(this.customerNumber.getText());
+			_customerNumber = Long.parseLong(this.customerNumber.getText());
 			_quantity = Integer.parseInt(this.pizzaQuantity.getText());
 		
 			if(!_customerName.isEmpty() && _quantity > 0) {
@@ -116,6 +116,7 @@ public class OrderView {
 		}
 	
 		} catch (NumberFormatException e){ 
+			System.out.println(e.getMessage());
 			this.errMessage.setText("Customer Number and Pizza Quantity should be a number!");
 		}
 		
